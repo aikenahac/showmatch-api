@@ -1,9 +1,7 @@
 const mongoose = require("mongoose");
 
 // Replace this with your MONGOURI.
-const {
-    MONGOURI
-} = require("../config.json");
+const MONGOURI = process.env.MONGOURI;
 
 const InitiateMongoServer = async () => {
   try {
