@@ -16,7 +16,7 @@ InitiateMongoServer();
 const app = Express();
 
 // PORT
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 7931;
 
 const DB_NAME = "prod";
 const CONNECTION_URL = process.env.MONGOURI;
