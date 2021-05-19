@@ -153,7 +153,7 @@ router.post(
  * @method - GET
  * @description - Get LoggedIn User
  * @param - /user/me
- */
+*/
 
 
 router.get("/me", auth, async (req, res) => {

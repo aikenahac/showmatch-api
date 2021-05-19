@@ -1,4 +1,4 @@
-const Express = require("express");
+const express = require("express");
 const BodyParser = require("body-parser");
 
 const MongoClient = require("mongodb").MongoClient;
@@ -13,7 +13,7 @@ const InitiateMongoServer = require("./config/db");
 // Initiate Mongo Server
 InitiateMongoServer();
 
-const app = Express();
+const app = express();
 
 // PORT
 const PORT = process.env.PORT;
@@ -41,7 +41,6 @@ app.get("/", (req, res) => {
 app.use("/user", user);
 
 app.listen(PORT, (req, res) => {
-
 	// This is not a good solution, mongoose should be the only one for REST, but I was on a time crunch. Tough luck
 	MongoClient.connect(CONNECTION_URL, { useNewUrlParser: true }, (error, client) => {
 		if (error) {
