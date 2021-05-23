@@ -12,15 +12,9 @@ const movies = require("./routes/movies");
 const InitiateMongoServer = require("./config/db");
 
 const app = express();
-const server = require('http').createServer(app);
-
-const socketio = require('socket.io')(server, {
-	path: "/ws/"
-});
 
 // PORT
 const PORT = process.env.PORT || 3000;
-const PORT2 = process.env.PORT2 || 3001;
 
 const DB_NAME = "prod";
 const CONNECTION_URL = process.env.MONGOURI;
@@ -43,30 +37,6 @@ app.listen(PORT, (req, res) => {
 	});
 	console.log(`Server Started at PORT ${PORT}`);
 });
-
-/*
-Starting with 3.0, express applications have become request handler functions that you pass to http or http Server instances. You need to pass the Server to socket.io, and not the express application function. Also make sure to call .listen on the server, not the app.
-const app = require('express')();
-const server = require('http').createServer(app);
-const io = require('socket.io')(server);
-io.on('connection', () => {
-server.listen(3000)
-*/
-
-socketio.on("connection", (userSocket) => {
-	console.log("A user connected.")
-
-	userSocket.on("disconnect", (data) => {
-		console.log(data);
-		userSocket.broadcast.emit("receive_message", data.user)
-	})
-	userSocket.on("send_message", (data) => {
-		console.log(data);
-		userSocket.broadcast.emit("receive_message", data)
-	})
-})
-
-server.listen(PORT2);
 
 // Middleware
 app.use(BodyParser.json());
